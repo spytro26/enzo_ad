@@ -47,9 +47,6 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     <div className="login-container">
       <div className="login-form">
         <div className="login-header">
-          <div className="login-logo">
-            <h1>🏢</h1>
-          </div>
           <h2>Enzo Admin Panel</h2>
           <p className="login-subtitle">Welcome back, admin</p>
         </div>
