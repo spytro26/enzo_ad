@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enzo Admin Setup Guide</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+            background: #f5f7fa;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .step {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+            color: #856404;
+        }
+        .success {
+            background: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+        .code {
+            background: #f1f3f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+        img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+        ol {
+            padding-left: 1.2rem;
+        }
+        li {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Enzo Admin Panel Setup Guide</h1>
+        
+        <div class="step warning">
+            <h3>⚠️ Important: Login Issue Fix</h3>
+            <p>If you're getting "Invalid credentials" error, the admin user doesn't exist in Firebase yet.</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 1: Create Admin User in Firebase</h3>
+            <ol>
+                <li>Open <a href="https://console.firebase.google.com" target="_blank">Firebase Console</a></li>
+                <li>Select your project: <span class="code">enzo-d373f</span></li>
+                <li>Go to <strong>Authentication</strong> in the left menu</li>
+                <li>Click on the <strong>Users</strong> tab</li>
+                <li>Click <strong>"Add user"</strong> button</li>
+                <li>Enter:
+                    <ul>
+                        <li>Email: <span class="code">admin@enzo.com</span></li>
+                        <li>Password: <span class="code">admin123</span></li>
+                    </ul>
+                </li>
+                <li>Click <strong>"Add user"</strong></li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Enable Authentication Methods</h3>
+            <ol>
+                <li>In Firebase Console, go to <strong>Authentication → Sign-in method</strong></li>
+                <li>Make sure <strong>"Email/Password"</strong> is enabled</li>
+                <li>If not enabled, click on it and toggle the <strong>"Enable"</strong> switch</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Test the Login</h3>
+            <ol>
+                <li>Go to your admin panel: <a href="http://localhost:5173" target="_blank">http://localhost:5173</a></li>
+                <li>Use the credentials:
+                    <ul>
+                        <li>Email: <span class="code">admin@enzo.com</span></li>
+                        <li>Password: <span class="code">admin123</span></li>
+                    </ul>
+                </li>
+                <li>Click <strong>"Login"</strong></li>
+            </ol>
+        </div>
+
+        <div class="step success">
+            <h3>✅ Responsive Design Fixed</h3>
+            <p>The responsive design issues have been fixed. The admin panel should now work properly on:</p>
+            <ul>
+                <li>Desktop computers</li>
+                <li>Tablets</li>
+                <li>Mobile phones</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>Step 4: Add Sample User Data (Optional)</h3>
+            <p>To test the user management features:</p>
+            <ol>
+                <li>Go to <strong>Firestore Database</strong> in Firebase Console</li>
+                <li>Create a collection called <span class="code">users</span></li>
+                <li>Add a document with sample data:</li>
+            </ol>
+            <pre style="background: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code>{
+  "name": "John Doe",
+  "phone": "1234567890",
+  "city": "New York",
+  "email": "john@example.com",
+  "coldRoom": {
+    "capacity": "100kg",
+    "temperature": "-18°C",
+    "model": "CR-100"
+  },
+  "freezer": {
+    "capacity": "50kg",
+    "temperature": "-20°C",
+    "model": "FR-50"
+  }
+}</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>🔧 Troubleshooting</h3>
+            <ul>
+                <li><strong>Still can't login?</strong> Check the browser console (F12) for error messages</li>
+                <li><strong>Site looks broken?</strong> Clear your browser cache and refresh</li>
+                <li><strong>No users showing?</strong> Make sure you have a "users" collection in Firestore</li>
+            </ul>
+        </div>
+
+        <a href="http://localhost:5173" class="button">🚀 Open Admin Panel</a>
+        <a href="https://console.firebase.google.com" class="button" style="background: #ff6b35;">🔥 Open Firebase Console</a>
+    </div>
+</body>
+</html>
