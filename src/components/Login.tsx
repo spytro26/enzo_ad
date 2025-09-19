@@ -46,50 +46,52 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   return (
     <div className="login-container">
       <div className="login-form">
-        <h2>Enzo Admin Panel</h2>
+        <div className="login-header">
+          <div className="login-logo">
+            <h1>🏢</h1>
+          </div>
+          <h2>Enzo Admin Panel</h2>
+          <p className="login-subtitle">Welcome back, admin</p>
+        </div>
+        
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">Email Address</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@enzo.com"
+              placeholder="Enter your email"
               required
             />
           </div>
+          
           <div className="form-group">
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your admin password"
+              placeholder="Enter your password"
               required
             />
           </div>
+          
           {error && <div className="error-message">{error}</div>}
-          <button type="submit" disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
+          
+          <button type="submit" disabled={loading} className="login-button">
+            {loading ? (
+              <>
+                <span className="loading-spinner"></span>
+                Signing in...
+              </>
+            ) : (
+              'Sign In'
+            )}
           </button>
         </form>
-        <div className="default-credentials">
-          <p><strong>Firebase Admin Credentials:</strong></p>
-          <p>Email: admin@enzo.com</p>
-          <p>Password: [Your set password]</p>
-          
-          <div className="setup-note">
-            <p><strong>✅ Using Firebase Authentication</strong></p>
-            <p>Make sure in your Firebase Console:</p>
-            <ol>
-              <li>Authentication → Sign-in method → Email/Password is <strong>enabled</strong></li>
-              <li>Authentication → Users → admin@enzo.com exists</li>
-            </ol>
-            <p>If you get login errors, check the browser console (F12) for details.</p>
-          </div>
-        </div>
       </div>
     </div>
   );

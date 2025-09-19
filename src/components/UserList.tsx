@@ -160,63 +160,124 @@ const UserList: React.FC<UserListProps> = ({ onUserSelect }) => {
           )}
         </div>
       ) : (
-        <div className="user-table-container">
-          <table className="user-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Contact</th>
-                <th>City</th>
-                <th>User Type</th>
-                <th>Last Activity</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredUsers.map(user => {
-                const calculations = user.calculations || [];
-                
-                return (
-                  <tr key={user.id}>
-                    <td>
-                      <div className="user-name">
-                        <strong>{user.name || 'Unknown User'}</strong>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="user-contact">
+        <>
+          {/* Desktop Table Layout */}
+          <div className="user-table-container">
+            <table className="user-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>City</th>
+                  <th>User Type</th>
+                  <th>Last Activity</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredUsers.map(user => {
+                  const calculations = user.calculations || [];
+                  
+                  return (
+                    <tr key={user.id}>
+                      <td>
+                        <div className="user-name">
+                          <strong>{user.name || 'Unknown User'}</strong>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="user-contact">
+                          {user.email && <div>{user.email}</div>}
+                          {user.phone && <div>{user.phone}</div>}
+                        </div>
+                      </td>
+                      <td>{user.city || 'N/A'}</td>
+                      <td>
+                        <span className={`user-type-badge ${user.userType || 'unknown'}`}>
+                          {user.userType || 'Unknown'}
+                        </span>
+                      </td>
+                      <td>
+                        {user.updatedAt ? 
+                          new Date(user.updatedAt.seconds * 1000).toLocaleDateString() : 
+                          user.createdAt ? 
+                          new Date(user.createdAt.seconds * 1000).toLocaleDateString() : 
+                          'N/A'
+                        }
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => onUserSelect(user)}
+                          className="view-details-button"
+                        >
+                          View Details ({calculations.length})
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Card Layout */}
+          <div className="user-cards-container">
+            {filteredUsers.map(user => {
+              const calculations = user.calculations || [];
+              
+              return (
+                <div key={`card-${user.id}`} className="user-card">
+                  <div className="user-card-header">
+                    <h3 className="user-card-name">{user.name || 'Unknown User'}</h3>
+                    <span className={`user-card-type ${user.userType || 'unknown'}`}>
+                      {user.userType || 'Unknown'}
+                    </span>
+                  </div>
+                  
+                  <div className="user-card-info">
+                    <div className="user-card-field">
+                      <span className="user-card-label">City</span>
+                      <span className="user-card-value">{user.city || 'N/A'}</span>
+                    </div>
+                    
+                    <div className="user-card-field">
+                      <span className="user-card-label">Last Activity</span>
+                      <span className="user-card-value">
+                        {user.updatedAt ? 
+                          new Date(user.updatedAt.seconds * 1000).toLocaleDateString() : 
+                          user.createdAt ? 
+                          new Date(user.createdAt.seconds * 1000).toLocaleDateString() : 
+                          'N/A'
+                        }
+                      </span>
+                    </div>
+                    
+                    <div className="user-card-field user-card-contact">
+                      <span className="user-card-label">Contact</span>
+                      <div className="user-card-value">
                         {user.email && <div>{user.email}</div>}
                         {user.phone && <div>{user.phone}</div>}
+                        {!user.email && !user.phone && <div>No contact info</div>}
                       </div>
-                    </td>
-                    <td>{user.city || 'N/A'}</td>
-                    <td>
-                      <span className={`user-type-badge ${user.userType || 'unknown'}`}>
-                        {user.userType || 'Unknown'}
-                      </span>
-                    </td>
-                    <td>
-                      {user.updatedAt ? 
-                        new Date(user.updatedAt.seconds * 1000).toLocaleDateString() : 
-                        user.createdAt ? 
-                        new Date(user.createdAt.seconds * 1000).toLocaleDateString() : 
-                        'N/A'
-                      }
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => onUserSelect(user)}
-                        className="view-details-button"
-                      >
-                        View Details ({calculations.length})
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                    </div>
+                  </div>
+                  
+                  <div className="user-card-actions">
+                    <span className="user-card-activity">
+                      {calculations.length} calculation{calculations.length !== 1 ? 's' : ''}
+                    </span>
+                    <button
+                      onClick={() => onUserSelect(user)}
+                      className="user-card-button"
+                    >
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
       )}
 
       <div className="user-count">
