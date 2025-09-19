@@ -175,9 +175,6 @@ const UserList: React.FC<UserListProps> = ({ onUserSelect }) => {
             <tbody>
               {filteredUsers.map(user => {
                 const calculations = user.calculations || [];
-                const coldRoomCalcs = calculations.filter(c => c.calculationType === 'cold_room');
-                const freezerCalcs = calculations.filter(c => c.calculationType === 'freezer_room');
-                const blasterCalcs = calculations.filter(c => c.calculationType === 'blast_freezer');
                 
                 return (
                   <tr key={user.id}>
